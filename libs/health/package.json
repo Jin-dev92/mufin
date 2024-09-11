@@ -1,8 +1,10 @@
 {
-  "name": "health",
+  "name": "@libs/health",
   "version": "1.0.0",
   "dependencies": {
     "@nestjs/terminus": "^10.2.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
 }

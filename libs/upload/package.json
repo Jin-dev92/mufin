@@ -1,12 +1,12 @@
 {
-  "name": "upload",
+  "name": "@libs/upload",
   "version": "1.0.0",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.614.0",
-    "multer-s3": "^3.0.1",
-    "reflect-metadata": "^0.1.13"
+    "multer-s3": "^3.0.1"
   },
   "devDependencies": {
-    "@types/multer-s3": "^3.0.3"
+    "@types/multer-s3": "^3.0.3",
+    "ts-node": "^10.9.2"
   }
 }

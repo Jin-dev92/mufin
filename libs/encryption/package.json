@@ -1,7 +1,6 @@
 {
   "name": "@libs/encryption",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {},
   "license": "ISC",
   "description": "",
@@ -9,6 +8,7 @@
     "bcrypt": "^5.1.1"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2"
+    "@types/bcrypt": "^5.0.2",
+    "ts-node": "^10.9.2"
   }
 }

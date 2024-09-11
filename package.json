@@ -4,7 +4,11 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "workspaces": [
+    "apps/**/*",
+    "libs/**/*"
+  ],
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -17,7 +21,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/mufin-nestjs/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/mufin-nestjs/test/jest-e2e.json",
+    "node_modules-rm": "rm -rf ./**/node_modules ./node_modules ./apps/**/node_modules ./libs/**/node_modules ./yarn.lock ./libs/**/yarn.lock"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.3",
@@ -29,7 +34,8 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "@libs/health": "^1.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
