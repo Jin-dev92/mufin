@@ -73,7 +73,8 @@
     "moduleNameMapper": {
       "^@libs/databases(|/.*)$": "<rootDir>/libs/databases/src/$1",
       "^@libs/encryption(|/.*)$": "<rootDir>/libs/encryption/src/$1",
-      "^@libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1"
+      "^@libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1",
+      "^@libs/upload(|/.*)$": "<rootDir>/libs/upload/src/$1"
     }
   }
 }
