@@ -9,8 +9,9 @@ export class AppService {
     // const db = await this.healthService.checkDB();
     const client = await this.healthService.checkClient();
     return {
-      // db,
-      client,
+      primary: {
+        ...client,
+      },
     };
   }
 }
