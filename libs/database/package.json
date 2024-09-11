@@ -1,0 +1,22 @@
+{
+  "name": "@libs/database",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "typeorm": "node -r ts-node/register node_modules/typeorm/cli.js",
+    "typeorm:d": "node -r ts-node/register node_modules/typeorm/cli.js -d src/config/database.config.ts",
+    "migration:create": "yarn typeorm migration:create ./src/migrations/create-table",
+    "migration:generate": "yarn typeorm  migration:generate -d src/config/database.config.ts",
+    "migration:run": "yarn typeorm  migration:run -d src/config/database.config.ts",
+    "migration:revert": "yarn typeorm migration:revert"
+  },
+  "dependencies": {
+    "@nestjs/typeorm": "^10.0.2",
+    "pg": "^8.12.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
+}

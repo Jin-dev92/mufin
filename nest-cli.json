@@ -8,13 +8,13 @@
     "tsConfigPath": "apps/mufin-nestjs/tsconfig.app.json"
   },
   "projects": {
-    "databases": {
+    "database": {
       "type": "library",
-      "root": "libs/databases",
+      "root": "libs/database",
       "entryFile": "index",
-      "sourceRoot": "libs/databases/src",
+      "sourceRoot": "libs/database/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/databases/tsconfig.lib.json"
+        "tsConfigPath": "libs/database/tsconfig.lib.json"
       }
     },
     "mufin-nestjs": {
@@ -24,15 +24,6 @@
       "sourceRoot": "apps/mufin-nestjs/src",
       "compilerOptions": {
         "tsConfigPath": "apps/mufin-nestjs/tsconfig.app.json"
-      }
-    },
-    "upload": {
-      "type": "application",
-      "root": "apps/upload",
-      "entryFile": "main",
-      "sourceRoot": "apps/upload/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/upload/tsconfig.app.json"
       }
     },
     "encryption": {
