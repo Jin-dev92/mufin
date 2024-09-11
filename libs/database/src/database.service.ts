@@ -9,7 +9,6 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     console.log('DatabaseService has been initialized.');
     const entities = this.dataSource.entityMetadatas.map((e) => e.name);
     console.log('Entities:', entities);
-    // await this.dataSource.initialize();
   }
 
   async onModuleDestroy() {}

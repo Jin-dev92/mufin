@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { DatabaseService } from './database.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { databaseOptionFactory } from './factory';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule.forRoot({ envFilePath: 'libs/database/.env' })],
+      // imports: [ConfigModule.forRoot({ envFilePath: 'libs/database/.env' })],
       inject: [ConfigService],
       useFactory: databaseOptionFactory,
     }),

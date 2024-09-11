@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import * as process from 'node:process';
 import { HealthModule } from '@libs/health';
+import { DatabaseModule } from '@libs/database';
 
 @Module({
   imports: [
@@ -14,6 +14,7 @@ import { HealthModule } from '@libs/health';
       isGlobal: true,
     }),
     HealthModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

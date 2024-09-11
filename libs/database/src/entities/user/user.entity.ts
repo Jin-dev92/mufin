@@ -41,7 +41,7 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ type: 'datetime', default: null })
+  @Column({ type: 'timestamp', default: null })
   deleteAt: Date;
 
   @OneToOne(() => UserAuth, (userAuth) => userAuth.user, {

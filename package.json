@@ -6,8 +6,8 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "apps/**/*",
-    "libs/**/*"
+    "apps/*",
+    "libs/*"
   ],
   "scripts": {
     "build": "nest build",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@libs/health": "^1.0.0",
+    "@libs/database": "^1.0.0",
     "@nestjs/axios": "^3.0.3",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
