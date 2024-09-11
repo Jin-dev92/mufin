@@ -4,7 +4,7 @@
   "sourceRoot": "apps/mufin-nestjs/src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "webpack": true,
+    "webpack": false,
     "tsConfigPath": "apps/mufin-nestjs/tsconfig.app.json"
   },
   "projects": {
@@ -51,6 +51,15 @@
       "sourceRoot": "libs/upload/src",
       "compilerOptions": {
         "tsConfigPath": "libs/upload/tsconfig.lib.json"
+      }
+    },
+    "health": {
+      "type": "library",
+      "root": "libs/health",
+      "entryFile": "index",
+      "sourceRoot": "libs/health/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/health/tsconfig.lib.json"
       }
     }
   },

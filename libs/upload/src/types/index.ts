@@ -1,1 +1,1 @@
-export * from "./multer-options.interface"
+export * from './multer-options.interface';

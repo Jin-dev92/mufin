@@ -41,6 +41,12 @@
       ],
       "@libs/upload/*": [
         "libs/upload/src/*"
+      ],
+      "@libs/health": [
+        "libs/health/src"
+      ],
+      "@libs/health/*": [
+        "libs/health/src/*"
       ]
     }
   }
