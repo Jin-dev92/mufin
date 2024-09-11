@@ -1,13 +1,6 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { IsOptional } from 'class-validator';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
-import { UserAuthRoleEnum } from '@app/database/types';
+import { UserAuthRoleEnum } from '../../types';
 
 @Entity()
 export class UserAuth {
@@ -24,19 +17,15 @@ export class UserAuth {
   })
   role: UserAuthRoleEnum;
 
-  @IsOptional()
   @Column({ default: null, type: 'varchar', length: 255 })
   salt: string;
 
-  @IsOptional()
   @Column({ type: 'varchar', length: 255, default: null })
   accessToken: string;
 
-  @IsOptional()
   @Column({ default: null, type: 'varchar', length: 255 })
   refreshToken: string;
 
   @OneToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
   user: User;
 }

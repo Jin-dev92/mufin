@@ -1,5 +1,4 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import * as console from 'node:console';
 import { DataSource } from 'typeorm';
 
 @Injectable()
