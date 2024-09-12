@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
 
-export class TictokAuthorizeDto {
+export class TictokFetchAccessTokenDto {
   @IsNotEmpty()
   @IsString()
   client_key: string;
