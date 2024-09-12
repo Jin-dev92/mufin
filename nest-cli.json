@@ -61,6 +61,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/health/tsconfig.lib.json"
       }
+    },
+    "tictok": {
+      "type": "library",
+      "root": "libs/tictok",
+      "entryFile": "index",
+      "sourceRoot": "libs/tictok/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/tictok/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

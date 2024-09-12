@@ -86,7 +86,9 @@
       "^@libs/encryption(|/.*)$": "<rootDir>/libs/encryption/src/$1",
       "^@libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1",
       "^@libs/upload(|/.*)$": "<rootDir>/libs/upload/src/$1",
-      "^@libs/health(|/.*)$": "<rootDir>/libs/health/src/$1"
+      "^@libs/health(|/.*)$": "<rootDir>/libs/health/src/$1",
+      "^@libs/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
+      "^@libs/tictok(|/.*)$": "<rootDir>/libs/tictok/src/$1"
     }
   }
 }
