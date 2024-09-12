@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import {
@@ -6,6 +6,7 @@ import {
   TictokAuthorizeDto,
 } from '@libs/tictok/interfaces';
 import { catchError, firstValueFrom } from 'rxjs';
+import { AxiosError } from 'axios';
 
 @Injectable()
 export class TictokService {
@@ -35,8 +36,8 @@ export class TictokService {
             },
           )
           .pipe(
-            catchError((error) => {
-              throw error;
+            catchError((error: AxiosError) => {
+              throw new HttpException(error.message, 400);
             }),
           ),
       );
@@ -52,7 +53,7 @@ export class TictokService {
 
       return this.configService.getOrThrow('TIKTOK_OAUTH_REDIRECT_URI');
     } catch (e) {
-      throw e;
+      throw new HttpException(e.message, 400);
     }
   }
 }
