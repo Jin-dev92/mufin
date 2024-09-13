@@ -6,11 +6,12 @@ export class AppService {
   constructor(private readonly healthService: HealthService) {}
 
   async healthCheck() {
-    // const db = await this.healthService.checkDB();
+    const db = await this.healthService.checkDB();
     const client = await this.healthService.checkClient();
     return {
       primary: {
         ...client,
+        ...db,
       },
     };
   }

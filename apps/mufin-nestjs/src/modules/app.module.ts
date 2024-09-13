@@ -8,6 +8,7 @@ import { MusicsModule } from './musics.module';
 import { GenresModule } from './genres.module';
 import { AppController } from '../controllers';
 import { AppService } from '../services';
+import { VideosModule } from './videos.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AppService } from '../services';
     UsersModule,
     MusicsModule,
     GenresModule,
+    VideosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
