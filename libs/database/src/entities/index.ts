@@ -1,4 +1,4 @@
 export * from './users';
 export * from './musics';
 export * from './artist';
-export * from './genre';
+export * from './genres';

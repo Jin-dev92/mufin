@@ -5,7 +5,7 @@ import { DatabaseModule } from '@libs/database';
 import { AuthModule } from './auth.module';
 import { UsersModule } from './users.module';
 import { MusicsModule } from './musics.module';
-import { GenreModule } from './genre.module';
+import { GenresModule } from './genres.module';
 import { AppController } from '../controllers';
 import { AppService } from '../services';
 
@@ -22,7 +22,7 @@ import { AppService } from '../services';
     AuthModule,
     UsersModule,
     MusicsModule,
-    GenreModule,
+    GenresModule,
   ],
   controllers: [AppController],
   providers: [AppService],

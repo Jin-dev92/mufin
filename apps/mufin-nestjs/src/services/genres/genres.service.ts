@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGenreDto, UpdateGenreDto } from '../../controllers';
+import { CreateGenresDto, UpdateGenresDto } from '../../controllers';
 
 @Injectable()
-export class GenreService {
-  create(createGenreDto: CreateGenreDto) {
+export class GenresService {
+  create(createGenresDto: CreateGenresDto) {
     return 'This action adds a new genre';
   }
 
@@ -15,7 +15,7 @@ export class GenreService {
     return `This action returns a #${id} genre`;
   }
 
-  update(id: number, updateGenreDto: UpdateGenreDto) {
+  update(id: number, updateGenresDto: UpdateGenresDto) {
     return `This action updates a #${id} genre`;
   }
 

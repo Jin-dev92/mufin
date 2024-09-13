@@ -1,26 +1,20 @@
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Artist, Genre } from '@libs/database/entities';
 
 @Entity()
 export class Music {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
   @Column('varchar', { length: 255 })
   title: string;
   @Column('boolean')
-  isAvailable: boolean;
+  is_available: boolean;
   @Column('varchar')
-  coverPath: string;
+  cover_path: string;
   @Column('varchar')
-  audioPath: string;
-  @Column('timestamp')
-  createdAt: Date;
+  audio_path: string;
+  @Column('timestamptz')
+  created_at: Date;
 
   @ManyToOne(() => Artist, (artist) => artist.id)
   artist: Artist;

@@ -3,7 +3,7 @@ import { Music } from '@libs/database/entities';
 
 @Entity()
 export class Artist {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column('varchar', { length: 100 })

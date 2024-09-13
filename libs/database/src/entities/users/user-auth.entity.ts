@@ -21,10 +21,10 @@ export class UserAuth {
   salt: string;
 
   @Column({ type: 'varchar', length: 255, default: null })
-  accessToken: string;
+  access_token: string;
 
   @Column({ default: null, type: 'varchar', length: 255 })
-  refreshToken: string;
+  refresh_token: string;
 
   @OneToOne(() => User)
   user: User;

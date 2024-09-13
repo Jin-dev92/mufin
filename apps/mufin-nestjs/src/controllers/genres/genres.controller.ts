@@ -1,21 +1,13 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
-import { GenreService } from '../../services';
-import { CreateGenreDto, UpdateGenreDto } from './dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { GenresService } from '../../services';
+import { CreateGenresDto, UpdateGenresDto } from './dto';
 
 @Controller('genre')
-export class GenreController {
-  constructor(private readonly genreService: GenreService) {}
-
+export class GenresController {
+  constructor(private readonly genreService: GenresService) {
+  }
   @Post()
-  create(@Body() createGenreDto: CreateGenreDto) {
+  create(@Body() createGenreDto: CreateGenresDto) {
     return this.genreService.create(createGenreDto);
   }
 
@@ -30,7 +22,7 @@ export class GenreController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGenreDto: UpdateGenreDto) {
+  update(@Param('id') id: string, @Body() updateGenreDto: UpdateGenresDto) {
     return this.genreService.update(+id, updateGenreDto);
   }
 

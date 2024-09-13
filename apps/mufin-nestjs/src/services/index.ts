@@ -1,5 +1,5 @@
 export * from './musics';
 export * from './auth';
-export * from './genre';
+export * from './genres';
 export * from './users';
 export * from './core';

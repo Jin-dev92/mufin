@@ -2,7 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Generated,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -13,11 +12,8 @@ import { UserPointHistory } from './user-point-history.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
-  @Generated('uuid')
-  @Column({ type: 'uuid', unique: true })
+  @PrimaryGeneratedColumn('uuid')
+  // @Column({ type: 'uuid', unique: true })
   uuid: string;
 
   @Column({ type: 'varchar', length: 20 })
@@ -41,7 +37,7 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ type: 'timestamp', default: null })
+  @Column({ type: 'timestamptz', default: null })
   deleteAt: Date;
 
   @OneToOne(() => UserAuth, (userAuth) => userAuth.user, {
