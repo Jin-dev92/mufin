@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { HealthModule } from '@libs/health';
 import { DatabaseModule } from '@libs/database';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth.module';
+import { UsersModule } from './users.module';
+import { MusicsModule } from './musics.module';
+import { GenreModule } from './genre.module';
+import { AppController } from '../controllers';
+import { AppService } from '../services';
 
 @Module({
   imports: [
@@ -17,6 +20,9 @@ import { AuthModule } from './auth/auth.module';
     HealthModule,
     DatabaseModule,
     AuthModule,
+    UsersModule,
+    MusicsModule,
+    GenreModule,
   ],
   controllers: [AppController],
   providers: [AppService],

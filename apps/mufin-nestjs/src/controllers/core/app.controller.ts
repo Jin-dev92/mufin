@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AppService } from '../../services/core/app.service';
 import { CustomHealthCheck } from '@libs/health';
 
 @Controller()
