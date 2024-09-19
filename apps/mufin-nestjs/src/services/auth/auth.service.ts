@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TictokService } from '@libs/tictok';
-import { LoginDto } from '../../controllers/auth/dto';
+import { LoginDto, SignUpDto } from '../../controllers/auth/dto';
 import { EncryptionService } from '@libs/encryption';
 import { UserAuthRepository, UserRepository } from '@libs/database';
 
@@ -38,6 +38,7 @@ export class AuthService {
 
   async logout() {}
 
+  async signUp(dto: SignUpDto) {}
   async signUpByKakao() {}
 
   async checkUser(email: string) {
