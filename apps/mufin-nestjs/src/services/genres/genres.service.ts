@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateGenresDto, UpdateGenresDto } from '../../controllers';
 import { GenreRepository } from '@libs/database';
 
@@ -36,7 +36,7 @@ export class GenresService {
   private async checkGenre(id: number) {
     const genre = await this.genresRepository.findOne({ where: { id } });
     if (!genre) {
-      throw new HttpException('Genre not found', 404);
+      throw new NotFoundException('Genre not found');
     }
     return genre;
   }

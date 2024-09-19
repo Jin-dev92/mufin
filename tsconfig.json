@@ -59,6 +59,12 @@
       ],
       "@libs/tictok/*": [
         "libs/tictok/src/*"
+      ],
+      "@libs/kakao": [
+        "libs/kakao/src"
+      ],
+      "@libs/kakao/*": [
+        "libs/kakao/src/*"
       ]
     }
   }

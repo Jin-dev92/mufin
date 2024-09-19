@@ -70,6 +70,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/tictok/tsconfig.lib.json"
       }
+    },
+    "kakao": {
+      "type": "library",
+      "root": "libs/kakao",
+      "entryFile": "index",
+      "sourceRoot": "libs/kakao/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/kakao/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,
