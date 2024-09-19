@@ -5,6 +5,7 @@ import { join } from 'path';
 export const databaseOptionFactory = (
   configService: ConfigService,
 ): TypeOrmModuleOptions | Promise<TypeOrmModuleOptions> => {
+  const env = configService.get('NODE_ENV');
   const options: TypeOrmModuleOptions = {
     type: 'postgres',
     host: configService.get('DB_HOST'),
@@ -20,7 +21,7 @@ export const databaseOptionFactory = (
     //   join(__dirname, '..', 'migrations', '**', '*.migrations.{ts,js}'),
     // ],
     // migrationsRun: false,
-    synchronize: configService.get('NODE_ENV') !== 'production',
+    synchronize: env && env !== 'production',
   };
   console.log('database options: ', options);
   return options;

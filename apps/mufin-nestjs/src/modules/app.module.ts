@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HealthModule } from '@libs/health';
 import { DatabaseModule } from '@libs/database';
-import { AuthModule } from './auth.module';
 import { UsersModule } from './users.module';
 import { MusicsModule } from './musics.module';
 import { GenresModule } from './genres.module';
 import { AppController } from '../controllers';
 import { AppService } from '../services';
 import { VideosModule } from './videos.module';
+import { AuthModule } from './auth.module';
 
 @Module({
   imports: [
