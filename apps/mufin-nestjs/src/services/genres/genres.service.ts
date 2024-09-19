@@ -1,25 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateGenresDto, UpdateGenresDto } from '../../controllers';
+import { GenreRepository } from '@libs/database';
 
 @Injectable()
 export class GenresService {
-  create(createGenresDto: CreateGenresDto) {
-    return 'This action adds a new genre';
+  constructor(private readonly genresRepository: GenreRepository) {}
+
+  create(dto: CreateGenresDto) {
+    this.genresRepository.create(dto);
   }
 
-  findAll() {
-    return `This action returns all genre`;
+  async findAll() {
+    return this.genresRepository.findAndCount();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+  async findOne(id: number) {
+    return await this.checkGenre(id);
   }
 
-  update(id: number, updateGenresDto: UpdateGenresDto) {
-    return `This action updates a #${id} genre`;
+  async update(id: number, dto: UpdateGenresDto) {
+    await this.checkGenre(id);
+    this.genresRepository.update(id, dto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  async remove(id: number) {
+    await this.checkGenre(id);
+    this.genresRepository.delete(id);
+  }
+
+  private async checkGenre(id: number) {
+    const genre = await this.genresRepository.findOne({ where: { id } });
+    if (!genre) {
+      throw new HttpException('Genre not found', 404);
+    }
+    return genre;
   }
 }
