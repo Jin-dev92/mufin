@@ -6,8 +6,13 @@ import { GenreRepository } from '@libs/database';
 export class GenresService {
   constructor(private readonly genresRepository: GenreRepository) {}
 
-  create(dto: CreateGenresDto) {
-    this.genresRepository.create(dto);
+  async create(dto: CreateGenresDto) {
+    try {
+      const genre = this.genresRepository.create(dto);
+      return await this.genresRepository.save(genre);
+    } catch (e) {
+      throw e;
+    }
   }
 
   async findAll() {

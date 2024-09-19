@@ -15,13 +15,15 @@ export class GenresController {
   constructor(private readonly genreService: GenresService) {}
 
   @Post()
-  create(@Body() dto: CreateGenresDto) {
-    return this.genreService.create(dto);
+  async create(@Body() dto: CreateGenresDto) {
+    const genre = await this.genreService.create(dto);
+    return genre.id;
   }
 
   @Get()
-  findAll() {
-    return this.genreService.findAll();
+  async findAll() {
+    const [genres, count] = await this.genreService.findAll();
+    return { genres, count };
   }
 
   @Get(':id')

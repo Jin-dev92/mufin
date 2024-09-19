@@ -3,6 +3,7 @@ import { DatabaseService } from './database.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { databaseOptionFactory } from './factory';
+import { GenreRepository } from '@libs/database/repository';
 
 @Module({
   imports: [
@@ -12,8 +13,8 @@ import { databaseOptionFactory } from './factory';
       useFactory: databaseOptionFactory,
     }),
   ],
-  providers: [DatabaseService],
-  exports: [DatabaseService],
+  providers: [DatabaseService, GenreRepository],
+  exports: [DatabaseService, GenreRepository],
 })
 export class DatabaseModule {
   // static register(modelName?: string): DynamicModule {
