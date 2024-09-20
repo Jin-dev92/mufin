@@ -7,13 +7,6 @@ import { IMulterOptions } from '../types';
 export const multerOptionsFactory = (
   configService: ConfigService,
 ): IMulterOptions => {
-  // const s3 = new S3Client({
-  //   region: configService.get('AWS_S3_REGION'),
-  //   credentials: {
-  //     accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
-  //     secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
-  //   },
-  // });
   return {
     storage: multerS3({
       s3: new S3Client({
