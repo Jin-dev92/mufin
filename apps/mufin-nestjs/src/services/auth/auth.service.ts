@@ -21,7 +21,11 @@ export class AuthService {
 
   async tictokAuthorizeExecute() {}
 
-  async kakaoOauthLogin(dto: KakaoOauthLoginDto) {
+  async kakaoOauthLogin(
+    dto: KakaoOauthLoginDto,
+    ip: string,
+    useragent: string,
+  ) {
     try {
       const {
         id_token,
