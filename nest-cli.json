@@ -44,15 +44,6 @@
         "tsConfigPath": "libs/utils/tsconfig.lib.json"
       }
     },
-    "upload": {
-      "type": "library",
-      "root": "libs/upload",
-      "entryFile": "index",
-      "sourceRoot": "libs/upload/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/upload/tsconfig.lib.json"
-      }
-    },
     "health": {
       "type": "library",
       "root": "libs/health",
@@ -78,6 +69,15 @@
       "sourceRoot": "libs/kakao/src",
       "compilerOptions": {
         "tsConfigPath": "libs/kakao/tsconfig.lib.json"
+      }
+    },
+    "aws": {
+      "type": "library",
+      "root": "libs/aws",
+      "entryFile": "index",
+      "sourceRoot": "libs/aws/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/aws/tsconfig.lib.json"
       }
     }
   },

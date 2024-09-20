@@ -92,7 +92,8 @@
       "^@libs/health(|/.*)$": "<rootDir>/libs/health/src/$1",
       "^@libs/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
       "^@libs/tictok(|/.*)$": "<rootDir>/libs/tictok/src/$1",
-      "^@libs/kakao(|/.*)$": "<rootDir>/libs/kakao/src/$1"
+      "^@libs/kakao(|/.*)$": "<rootDir>/libs/kakao/src/$1",
+      "^@libs/aws(|/.*)$": "<rootDir>/libs/aws/src/$1"
     }
   }
 }
