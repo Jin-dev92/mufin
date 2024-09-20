@@ -30,7 +30,7 @@ export const multerOptionsFactory = (
         const fileType = file.mimetype.split('/')[0];
         const ext = extname(file.originalname); // 확장자
         const baseName = basename(file.originalname, ext); // 확장자 제외
-        const fileName = `${fileType}s/${baseName}-${Date.now()}${ext}`;
+        const fileName = `${fileType}s/${Date.now()}_${baseName}.${ext}`;
         callback(null, fileName);
       },
     }),
