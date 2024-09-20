@@ -4,9 +4,10 @@ import { AuthController } from '../controllers';
 import { AuthService } from '../services';
 import { EncryptionModule } from '@libs/encryption';
 import { DatabaseModule } from '@libs/database';
+import { KakaoModule } from '@libs/kakao';
 
 @Module({
-  imports: [TictokModule, EncryptionModule, DatabaseModule],
+  imports: [TictokModule, KakaoModule, EncryptionModule, DatabaseModule],
   controllers: [AuthController],
   providers: [AuthService],
 })

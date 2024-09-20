@@ -31,6 +31,12 @@ export class User {
   @Column({ type: 'int', default: 0 })
   point: number;
 
+  @Column({ type: 'varchar', length: 50 })
+  ip: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  useragent: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

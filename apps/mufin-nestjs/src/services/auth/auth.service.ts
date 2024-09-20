@@ -1,13 +1,19 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TictokService } from '@libs/tictok';
-import { LoginDto, SignUpDto } from '../../controllers/auth/dto';
+import {
+  KakaoOauthLoginDto,
+  LoginDto,
+  SignUpDto,
+} from '../../controllers/auth/dto';
 import { EncryptionService } from '@libs/encryption';
 import { UserAuthRepository, UserRepository } from '@libs/database';
+import { KakaoService } from '@libs/kakao';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly tictokService: TictokService,
+    private readonly kakaoService: KakaoService,
     private readonly encryptionService: EncryptionService,
     private readonly userRepository: UserRepository,
     private readonly userAuthRepository: UserAuthRepository,
@@ -15,7 +21,39 @@ export class AuthService {
 
   async tictokAuthorizeExecute() {}
 
-  async login(dto: LoginDto) {
+  async kakaoOauthLogin(dto: KakaoOauthLoginDto) {
+    try {
+      const {
+        id_token,
+        access_token,
+        refresh_token_expires_in,
+        refresh_token,
+        expires_in,
+        token_type,
+        scope,
+      } = await this.kakaoService.login(dto);
+
+      return {
+        id_token,
+        access_token,
+        refresh_token_expires_in,
+        refresh_token,
+        expires_in,
+        token_type,
+        scope,
+      };
+    } catch (e) {
+      console.log('@@@@@@@@', e);
+      throw new UnauthorizedException('카카오 로그인에 실패했습니다.');
+    }
+  }
+
+  kakaoOauthLogout() {
+    this.kakaoService.logout();
+  }
+
+  async adminLogin(dto: LoginDto) {
+    // 이후 어드민 서버 및 클라이언트 분리 필요
     const { email, password } = dto;
     try {
       const user = await this.checkUser(email);
@@ -39,6 +77,7 @@ export class AuthService {
   async logout() {}
 
   async signUp(dto: SignUpDto) {}
+
   async signUpByKakao() {}
 
   async checkUser(email: string) {
