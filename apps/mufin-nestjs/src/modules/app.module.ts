@@ -9,6 +9,7 @@ import { AppController } from '../controllers';
 import { AppService } from '../services';
 import { VideosModule } from './videos.module';
 import { AuthModule } from './auth.module';
+import { UploadModule } from './upload.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth.module';
     MusicsModule,
     GenresModule,
     VideosModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],

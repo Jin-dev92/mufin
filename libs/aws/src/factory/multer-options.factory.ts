@@ -34,7 +34,7 @@ export const multerOptionsFactory = (
      * @note 이미지 파일과 동영상 파일 업로드 시 용량 제한을 분리하도록 하는 로직 필요
      */
     limits: {
-      fileSize: 5 * 1024 * 1024, // 5mb
+      fileSize: 10 * 1024 * 1024, // 10mb
     },
   };
 };

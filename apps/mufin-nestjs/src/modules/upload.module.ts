@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UploadService } from '../services/upload/upload.service';
-import { UploadController } from '../controllers/upload/upload.controller';
+import { UploadController } from '../controllers';
+import { UploadService } from '../services';
+import { AwsModule } from '@libs/aws';
 
 @Module({
+  imports: [AwsModule],
   controllers: [UploadController],
   providers: [UploadService],
 })
