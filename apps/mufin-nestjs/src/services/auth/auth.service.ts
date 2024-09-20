@@ -48,7 +48,6 @@ export class AuthService {
         // scope,
       };
     } catch (e) {
-      console.log('@@@@@@@@', e);
       throw new UnauthorizedException('카카오 로그인에 실패했습니다.');
     }
   }

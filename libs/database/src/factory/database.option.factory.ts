@@ -23,6 +23,5 @@ export const databaseOptionFactory = (
     // migrationsRun: false,
     synchronize: env && env !== 'production',
   };
-  console.log('database options: ', options);
   return options;
 };

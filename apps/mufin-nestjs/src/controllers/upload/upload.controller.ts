@@ -28,13 +28,13 @@ export class UploadController {
     )
     file: Express.MulterS3.File,
   ) {
-    const { size, path, mimetype, destination } =
+    const { size, path, mimetype, location } =
       await this.uploadService.uploadFile(file);
     return {
       path,
       size,
       mimetype,
-      destination,
+      location,
     };
   }
 
@@ -53,13 +53,13 @@ export class UploadController {
     )
     file: Express.MulterS3.File,
   ) {
-    const { size, path, mimetype, destination } =
+    const { size, path, mimetype, location } =
       await this.uploadService.uploadFile(file);
     return {
       path,
       size,
       mimetype,
-      destination,
+      location,
     };
   }
 
@@ -78,13 +78,14 @@ export class UploadController {
     )
     file: Express.MulterS3.File,
   ) {
-    const { size, path, mimetype, destination } =
+    const { size, path, mimetype, location } =
       await this.uploadService.uploadFile(file);
+
     return {
       path,
       size,
       mimetype,
-      destination,
+      location,
     };
   }
 }

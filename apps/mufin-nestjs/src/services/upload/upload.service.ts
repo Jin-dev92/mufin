@@ -6,6 +6,11 @@ export class UploadService {
   constructor(private readonly awsService: AwsService) {}
 
   async uploadFile(file: Express.MulterS3.File) {
-    return this.awsService.uploadFile(file);
+    try {
+      console.log(file);
+      return this.awsService.uploadFile(file);
+    } catch (e) {
+      throw e;
+    }
   }
 }

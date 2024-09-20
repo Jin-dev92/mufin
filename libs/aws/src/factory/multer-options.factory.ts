@@ -7,17 +7,22 @@ import { IMulterOptions } from '../types';
 export const multerOptionsFactory = (
   configService: ConfigService,
 ): IMulterOptions => {
-  const s3 = new S3Client({
-    region: configService.get('AWS_S3_REGION'),
-    credentials: {
-      accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
-      secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
-    },
-  });
-
+  // const s3 = new S3Client({
+  //   region: configService.get('AWS_S3_REGION'),
+  //   credentials: {
+  //     accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
+  //     secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
+  //   },
+  // });
   return {
     storage: multerS3({
-      s3,
+      s3: new S3Client({
+        region: configService.get('AWS_S3_REGION'),
+        credentials: {
+          accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
+        },
+      }),
       bucket: configService.get('AWS_S3_BUCKET'),
       acl: 'public-read',
       contentType: multerS3.AUTO_CONTENT_TYPE,
@@ -34,7 +39,7 @@ export const multerOptionsFactory = (
      * @note 이미지 파일과 동영상 파일 업로드 시 용량 제한을 분리하도록 하는 로직 필요
      */
     limits: {
-      fileSize: 10 * 1024 * 1024, // 10mb
+      fileSize: 500 * 1024 * 1024, // 500mb
     },
   };
 };
