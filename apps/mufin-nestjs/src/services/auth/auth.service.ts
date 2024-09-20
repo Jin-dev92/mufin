@@ -31,16 +31,17 @@ export class AuthService {
         expires_in,
         token_type,
         scope,
-      } = await this.kakaoService.login(dto);
+      } = await this.kakaoService.requestAccessToken(dto.code);
+      /* 유저 체크 후, 가입된 이력이 없다면 새로 만들어줌. */
 
       return {
-        id_token,
+        // id_token,
         access_token,
         refresh_token_expires_in,
         refresh_token,
         expires_in,
         token_type,
-        scope,
+        // scope,
       };
     } catch (e) {
       console.log('@@@@@@@@', e);

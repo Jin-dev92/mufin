@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { GetKakaoTokenDto } from 'libs/kakao/src/interfaces/dto';
 import { GetKakaoTokenResponse } from '@libs/kakao/interfaces';
 import { firstValueFrom } from 'rxjs';
-import { KakaoOauthLoginDto } from '../../../apps/mufin-nestjs/src/controllers/auth/dto';
 
 @Injectable()
 export class KakaoService {
@@ -15,9 +14,7 @@ export class KakaoService {
     private readonly httpService: HttpService,
   ) {}
 
-  async login(dto: KakaoOauthLoginDto) {
-    const { code, useragent, ip } = dto;
-
+  async requestAccessToken(code: string) {
     const body: GetKakaoTokenDto = {
       grant_type: 'authorization_code',
       client_id: this.configService.getOrThrow('KAKAO_CLIENT_ID'),
@@ -34,7 +31,6 @@ export class KakaoService {
           body,
         ),
       );
-      console.log('login', data);
       return data;
     } catch (e) {
       throw e;
@@ -43,6 +39,13 @@ export class KakaoService {
 
   async logout() {}
 
+  async refreshToken() {}
+  async getUserInfo(accessToken: string) {
+    try {
+    } catch (e) {
+      throw new UnauthorizedException('카카오 유저 정보 로드 실패');
+    }
+  }
   // private async getKaKaoAuthorize() {
   //   // 인가 코드 발급
   //   try {
