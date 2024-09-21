@@ -27,7 +27,7 @@ export const multerOptionsFactory = (
         const ext = extname(file.originalname); // 확장자
         const baseName = basename(file.originalname, ext); // 확장자 제외
         const fileName = `${fileType}s/${Date.now()}_${baseName}${ext}`;
-        console.log('@@@@@@', fileName);
+        console.log(_req);
         callback(null, fileName);
       },
     }),
