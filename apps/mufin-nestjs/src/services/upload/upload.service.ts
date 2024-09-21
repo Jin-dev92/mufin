@@ -7,7 +7,6 @@ export class UploadService {
 
   async uploadFile(file: Express.MulterS3.File) {
     try {
-      console.log(file);
       return this.awsService.uploadFile(file);
     } catch (e) {
       throw e;

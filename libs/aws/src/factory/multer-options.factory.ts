@@ -10,20 +10,24 @@ export const multerOptionsFactory = (
   return {
     storage: multerS3({
       s3: new S3Client({
-        region: configService.get('AWS_S3_REGION'),
+        region: configService.getOrThrow('AWS_S3_REGION'),
         credentials: {
-          accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
-          secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
+          accessKeyId: configService.getOrThrow('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: configService.getOrThrow('AWS_SECRET_ACCESS_KEY'),
         },
       }),
-      bucket: configService.get('AWS_S3_BUCKET'),
+      metadata(req, file, callback) {
+        callback(null, { owner: 'ag-ent' });
+      },
+      bucket: configService.getOrThrow('AWS_S3_BUCKET'),
       acl: 'public-read',
       contentType: multerS3.AUTO_CONTENT_TYPE,
       key(_req, file, callback) {
         const fileType = file.mimetype.split('/')[0];
         const ext = extname(file.originalname); // 확장자
         const baseName = basename(file.originalname, ext); // 확장자 제외
-        const fileName = `${fileType}s/${Date.now()}_${baseName}.${ext}`;
+        const fileName = `${fileType}s/${Date.now()}_${baseName}${ext}`;
+        console.log('@@@@@@', fileName);
         callback(null, fileName);
       },
     }),
@@ -32,7 +36,7 @@ export const multerOptionsFactory = (
      * @note 이미지 파일과 동영상 파일 업로드 시 용량 제한을 분리하도록 하는 로직 필요
      */
     limits: {
-      fileSize: 500 * 1024 * 1024, // 500mb
+      fileSize: 10 * 1024 * 1024, // 500mb
     },
   };
 };

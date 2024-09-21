@@ -5,9 +5,13 @@ export class AwsService {
   constructor() {}
   uploadFile(file: Express.MulterS3.File) {
     //   https://issuebombom.tistory.com/104
-    if (!file) {
-      throw new BadRequestException('파일이 존재하지 않습니다.');
+    try {
+      if (!file) {
+        throw new BadRequestException('파일이 존재하지 않습니다.');
+      }
+      return file;
+    } catch (e) {
+      throw e;
     }
-    return file;
   }
 }

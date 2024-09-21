@@ -13,7 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  @Post('audio')
+  @Post('audios')
   @UseInterceptors(FileInterceptor('file'))
   async uploadAudio(
     @UploadedFile(
@@ -38,7 +38,7 @@ export class UploadController {
     };
   }
 
-  @Post('video')
+  @Post('videos')
   @UseInterceptors(FileInterceptor('file'))
   async uploadVideo(
     @UploadedFile(
@@ -63,7 +63,7 @@ export class UploadController {
     };
   }
 
-  @Post('image')
+  @Post('images')
   @UseInterceptors(FileInterceptor('file'))
   async uploadImage(
     @UploadedFile(
@@ -78,14 +78,18 @@ export class UploadController {
     )
     file: Express.MulterS3.File,
   ) {
-    const { size, path, mimetype, location } =
-      await this.uploadService.uploadFile(file);
-
-    return {
-      path,
-      size,
-      mimetype,
-      location,
-    };
+    try {
+      const { size, path, mimetype, location } =
+        await this.uploadService.uploadFile(file);
+      console.log(file);
+      return {
+        path,
+        size,
+        mimetype,
+        location,
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 }
