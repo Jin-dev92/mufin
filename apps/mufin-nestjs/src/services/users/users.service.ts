@@ -81,7 +81,7 @@ export class UsersService {
     await this.userRepository.remove(user);
   }
 
-  async resetPassword(uuid: string, password: string) {
+  async resetUserPassword(uuid: string, password: string) {
     try {
       const user = await this.checkUserWithUserAuth(uuid);
       if (
