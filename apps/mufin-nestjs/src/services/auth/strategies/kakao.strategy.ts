@@ -1,6 +1,30 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { Strategy } from 'passport-kakao';
+import { Profile, Strategy } from 'passport-kakao';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class KakaoStrategy extends PassportStrategy(Strategy, 'kakao') {}
+export class KakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
+  constructor(private readonly configService: ConfigService) {
+    super({
+      clientID: configService.get('KAKAO_CLIENT_ID'),
+      clientSecret: configService.get('KAKAO_CLIENT_SECRET'),
+      callbackURL: configService.get('SERVER_URL') + '/auth/kakao/callback',
+    });
+  }
+
+  async validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: (error: any, user?: any, info?: any) => void,
+  ) {
+    try {
+      const { _json } = profile;
+      console.log('kakaoStrategy ', profile);
+      done(null, { kakaoId: _json.id });
+    } catch (error) {
+      done(error);
+    }
+  }
+}
