@@ -13,7 +13,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
 
   async onModuleDestroy() {}
 
-  getQueryRunner() {
+  createQueryRunner() {
     return this.dataSource.createQueryRunner();
   }
 }

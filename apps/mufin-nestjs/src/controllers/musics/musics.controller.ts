@@ -15,8 +15,8 @@ export class MusicsController {
   constructor(private readonly musicsService: MusicsService) {}
 
   @Post()
-  create(@Body() createMusicDto: CreateMusicDto) {
-    return this.musicsService.create(createMusicDto);
+  create(@Body() dto: CreateMusicDto) {
+    return this.musicsService.create(dto);
   }
 
   @Get()
@@ -30,8 +30,8 @@ export class MusicsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMusicDto: UpdateMusicDto) {
-    return this.musicsService.update(+id, updateMusicDto);
+  update(@Param('id') id: string, @Body() dto: UpdateMusicDto) {
+    return this.musicsService.update(+id, dto);
   }
 
   @Delete(':id')

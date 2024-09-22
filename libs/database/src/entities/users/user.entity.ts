@@ -13,7 +13,6 @@ import { UserPointHistory } from './user-point-history.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  // @Column({ type: 'uuid', unique: true })
   uuid: string;
 
   @Column({ type: 'varchar', length: 20 })
@@ -50,7 +49,7 @@ export class User {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
-  auth: UserAuth;
+  userAuth: UserAuth;
 
   @OneToMany(
     () => UserPointHistory,
