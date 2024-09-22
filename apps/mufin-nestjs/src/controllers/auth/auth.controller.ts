@@ -7,10 +7,9 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthService } from '../../services';
+import { AuthService, IKaKaoUserRequest } from '../../services';
 import { LoginDto, SignUpDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
-import { IKaKaoUserRequest } from '../../services/auth/strategies/kakao/interfaces';
 
 @Controller('auth')
 export class AuthController {
