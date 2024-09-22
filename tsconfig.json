@@ -49,9 +49,11 @@
         "libs/health/src/*"
       ],
       "@libs/auth": [
+        "libs/auth/src",
         "libs/auth/src"
       ],
       "@libs/auth/*": [
+        "libs/auth/src/*",
         "libs/auth/src/*"
       ],
       "@libs/tictok": [
