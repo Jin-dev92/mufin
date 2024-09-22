@@ -2,6 +2,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { Profile, Strategy } from 'passport-kakao';
 import { ConfigService } from '@nestjs/config';
+import { IKakaoUser } from './interfaces';
 
 @Injectable()
 export class KakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
@@ -17,7 +18,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
     accessToken: string,
     refreshToken: string,
     profile: Profile,
-    done: (error: any, user?: any, info?: any) => void,
+    done: (error: any, user?: IKakaoUser, info?: any) => void,
   ) {
     try {
       const { _json } = profile;

@@ -1,8 +1,16 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from '../../services';
 import { LoginDto, SignUpDto } from './dto';
-import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { IKaKaoUserRequest } from '../../services/auth/strategies/kakao/interfaces';
 
 @Controller('auth')
 export class AuthController {
@@ -18,9 +26,12 @@ export class AuthController {
     return this.authService.signUp(dto);
   }
 
-  @Post('kakao/login')
+  @Get('kakao/login')
   @UseGuards(AuthGuard('kakao'))
-  async kakaoOauthLogin(@Req() req: Request, @Res() res: Response) {}
+  // @HttpCode(301)
+  async kakaoOauthLogin(@Req() req: IKaKaoUserRequest, @Res() res: Response) {
+    // req.user.kakaoId;
+  }
 
   @Post('/kakao/logout')
   async kakaoOauthLogout() {
