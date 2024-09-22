@@ -1,13 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TictokService } from '@libs/tictok';
-import {
-  KakaoOauthLoginDto,
-  LoginDto,
-  SignUpDto,
-} from '../../controllers/auth/dto';
 import { EncryptionService } from '@libs/encryption';
 import { UserAuthRepository, UserRepository } from '@libs/database';
 import { KakaoService } from '@libs/kakao';
+import { KakaoOauthLoginDto, LoginDto, SignUpDto } from '../../controllers';
 
 @Injectable()
 export class AuthService {
@@ -60,17 +56,17 @@ export class AuthService {
     // 이후 어드민 서버 및 클라이언트 분리 필요
     const { email, password } = dto;
     try {
-      const user = await this.checkUser(email);
+      const user = await this.checkUserWithUserAuth(email);
       if (
         !this.encryptionService.validatePassword(
           password,
-          user.auth.salt,
-          user.auth.password,
+          user.userAuth.salt,
+          user.userAuth.password,
         )
       ) {
         throw new UnauthorizedException('비밀번호가 일치하지 않습니다.');
       }
-      this.userAuthRepository.update(user.auth.id, {
+      this.userAuthRepository.update(user.userAuth.id, {
         // access_token: this.encryptionService.
       });
     } catch (e) {
@@ -87,8 +83,18 @@ export class AuthService {
   async checkUser(email: string) {
     const user = await this.userRepository.findOne({
       where: { email },
+    });
+    if (!user) {
+      throw new UnauthorizedException('해당 유저는 존재하지 않습니다.');
+    }
+    return user;
+  }
+
+  async checkUserWithUserAuth(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email },
       relations: {
-        auth: true,
+        userAuth: true,
       },
     });
     if (!user) {

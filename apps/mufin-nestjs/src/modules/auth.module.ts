@@ -5,9 +5,16 @@ import { AuthService } from '../services';
 import { EncryptionModule } from '@libs/encryption';
 import { DatabaseModule } from '@libs/database';
 import { KakaoModule } from '@libs/kakao';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [TictokModule, KakaoModule, EncryptionModule, DatabaseModule],
+  imports: [
+    PassportModule,
+    TictokModule,
+    KakaoModule,
+    EncryptionModule,
+    DatabaseModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService],
 })
