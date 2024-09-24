@@ -15,7 +15,7 @@ import { UploadModule } from './upload.module';
   imports: [
     ConfigModule.forRoot({
       envFilePath: ['development', 'production'].includes(process.env.NODE_ENV)
-        ? `.${process.env.NODE_ENV}.env`
+        ? `.env.${process.env.NODE_ENV}`
         : '.env',
       isGlobal: true,
     }),
