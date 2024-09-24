@@ -1,0 +1,8 @@
+name: Deploy Server to AWS Elastic Beanstalk
+
+on:
+    push:
+        branches:
+          - dev
+        paths:
+          - './**'
