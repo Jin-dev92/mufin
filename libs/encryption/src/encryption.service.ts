@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { ConfigService } from '@nestjs/config';
+import { User } from '@libs/database';
+import { JwtService } from '@nestjs/jwt';
+import { IJwtPayload } from '@libs/encryption/type';
 
 @Injectable()
 export class EncryptionService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   getSalt() {
     try {
@@ -63,5 +69,22 @@ export class EncryptionService {
   validatePassword(password: string, salt: string, hash: string) {
     const hashPassword = this.hashPassword(password, salt);
     return hashPassword === hash;
+  }
+
+  generateAccessToken(user: User) {
+    const payload: IJwtPayload = {
+      userUid: user.uuid,
+    };
+    return this.jwtService.sign(payload);
+  }
+  generateRefreshToken(user: User) {
+    const payload: IJwtPayload = {
+      userUid: user.uuid,
+    };
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+      expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRES_IN'),
+    });
+    return refreshToken;
   }
 }

@@ -1,10 +1,10 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
 import { UserAuth } from '@libs/database';
 
 @Entity()
 export class UserKakaoOauth {
-  @PrimaryGeneratedColumn('uuid')
-  uuid: string;
+  @PrimaryColumn({ type: 'int', unique: true })
+  kakaoId: number;
 
   @Column({ type: 'varchar', length: 255 })
   id_token: string;

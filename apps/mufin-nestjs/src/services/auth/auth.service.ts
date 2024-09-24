@@ -3,7 +3,7 @@ import { TictokService } from '@libs/tictok';
 import { EncryptionService } from '@libs/encryption';
 import { UserAuthRepository, UserRepository } from '@libs/database';
 import { KakaoService } from '@libs/kakao';
-import { KakaoOauthLoginDto, LoginDto, SignUpDto } from '../../controllers';
+import { KakaoOauthCallbackDto, LoginDto, SignUpDto } from '../../controllers';
 
 @Injectable()
 export class AuthService {
@@ -15,14 +15,29 @@ export class AuthService {
     private readonly userAuthRepository: UserAuthRepository,
   ) {}
 
-  async tictokAuthorizeExecute() {}
+  async kakaoLoginExecutes(kakaoId: number) {
+    if (!kakaoId) {
+      return null;
+    }
+    let user = await this.checkUserWithUserAuthByKakaoId(kakaoId);
+    // if(!user){
+    //   user = await this.userRepository.create()
+    // }
+    const accessToken = this.encryptionService.generateAccessToken(user);
+    const refreshToken = this.encryptionService.generateRefreshToken(user);
 
-  async kakaoOauthLogin(
-    dto: KakaoOauthLoginDto,
-    ip: string,
-    useragent: string,
-  ) {
+    // await this.userRepository.update({});
+
+    return {
+      accessToken,
+      refreshToken,
+    };
+  }
+
+  async kakaoOauthCallbackExecute(dto: KakaoOauthCallbackDto) {
     try {
+      const { code } = dto;
+
       const {
         id_token,
         access_token,
@@ -31,7 +46,7 @@ export class AuthService {
         expires_in,
         token_type,
         scope,
-      } = await this.kakaoService.requestAccessToken(dto.code);
+      } = await this.kakaoService.requestAccessToken(code);
       /* 유저 체크 후, 가입된 이력이 없다면 새로 만들어줌. */
 
       return {
@@ -56,7 +71,7 @@ export class AuthService {
     // 이후 어드민 서버 및 클라이언트 분리 필요
     const { email, password } = dto;
     try {
-      const user = await this.checkUserWithUserAuth(email);
+      const user = await this.checkUserWithUserAuthByEmail(email);
       if (
         !this.encryptionService.validatePassword(
           password,
@@ -74,13 +89,11 @@ export class AuthService {
     }
   }
 
-  async logout() {}
+  async adminLogout() {}
 
-  async signUp(dto: SignUpDto) {}
+  async adminSignUp(dto: SignUpDto) {}
 
-  async signUpByKakao() {}
-
-  async checkUser(email: string) {
+  private async checkUser(email: string) {
     const user = await this.userRepository.findOne({
       where: { email },
     });
@@ -90,7 +103,7 @@ export class AuthService {
     return user;
   }
 
-  async checkUserWithUserAuth(email: string) {
+  private async checkUserWithUserAuthByEmail(email: string) {
     const user = await this.userRepository.findOne({
       where: { email },
       relations: {
@@ -100,6 +113,20 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('해당 유저는 존재하지 않습니다.');
     }
+    return user;
+  }
+
+  private async checkUserWithUserAuthByKakaoId(kakaoId: number) {
+    const user = await this.userRepository.findOne({
+      where: {
+        userAuth: {
+          kakaoOauth: { kakaoId },
+        },
+      },
+      relations: {
+        userAuth: true,
+      },
+    });
     return user;
   }
 }

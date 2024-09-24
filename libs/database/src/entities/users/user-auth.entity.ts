@@ -1,6 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 import { UserAuthRoleEnum } from '../../types';
+import { UserKakaoOauth } from '@libs/database/entities/users/user-kakao.oauth.entity';
 
 @Entity()
 export class UserAuth {
@@ -28,4 +29,11 @@ export class UserAuth {
 
   @OneToOne(() => User)
   user: User;
+
+  @OneToOne(() => UserKakaoOauth, {
+    nullable: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  kakaoOauth: UserKakaoOauth;
 }
