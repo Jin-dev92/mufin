@@ -117,8 +117,6 @@ jobs:
           utcOffset: '+09:00'
 
       # Deploy to Elastic Beanstalk
-      # application_name과 environment_name을 꼭 확인하자!
-      # 해당 부분은 꼭 같아야 한다!!
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
