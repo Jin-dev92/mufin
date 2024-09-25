@@ -10,7 +10,7 @@ export const multerOptionsFactory = (
   return {
     storage: multerS3({
       s3: new S3Client({
-        region: configService.getOrThrow('AWS_S3_REGION'),
+        region: configService.getOrThrow('AWS_REGION'),
         credentials: {
           accessKeyId: configService.getOrThrow('AWS_ACCESS_KEY_ID'),
           secretAccessKey: configService.getOrThrow('AWS_SECRET_ACCESS_KEY'),
