@@ -7,7 +7,7 @@ on:
 jobs:
   buildAndTest:
     name: CI Pipeline
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       # Node version은 20 버전을 이용한다.
       matrix:
