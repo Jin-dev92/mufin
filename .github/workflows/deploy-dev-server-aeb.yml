@@ -87,8 +87,8 @@ jobs:
       # 아래에서 zip 파일 구성 시 src 폴더를 제외한 것을 확인할 수 있다.
       - name: Run build
         run: yarn build
-      - name: Start Server
-        run: yarn start:prod
+#      - name: Start Server
+#        run: yarn start:prod
       # Install AWS CLI 2
       - name: Install AWS CLI 2
         run: |
