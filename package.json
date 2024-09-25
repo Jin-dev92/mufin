@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@libs/database": "^1.0.0",
+    "@libs/encryption": "^1.0.0",
     "@libs/health": "^1.0.0",
     "@nestjs/axios": "^3.0.3",
     "@nestjs/common": "^10.0.0",
