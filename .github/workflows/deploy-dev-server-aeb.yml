@@ -111,7 +111,7 @@ jobs:
       # Deploy to Elastic Beanstalk
       # application_name과 environment_name을 꼭 확인하자!
       # 해당 부분은 꼭 같아야 한다!!
-      - name: Deploy to EB
+      - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -121,3 +121,4 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           version_label: ${{github.SHA}}
           deployment_package: deploy.zip
+          wait_for_environment_recovery: 180
