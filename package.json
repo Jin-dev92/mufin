@@ -5,6 +5,9 @@
   "author": "ag-ent",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "^20.12.2"
+  },
   "workspaces": [
     "apps/*",
     "libs/*"
