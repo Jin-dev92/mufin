@@ -47,7 +47,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo PORT=8081 >> .env
+#          echo PORT=8081 >> .env
           echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
           echo SERVER_URL=${{ secrets.SERVER_URL }} >> .env
           echo DB_HOST=${{ secrets.DB_HOST }} >> .env
@@ -106,7 +106,15 @@ jobs:
       # -x는 zip파일 생성 시에 해당 부분들을 제외한다.
       - name: Generate deployment package
 #        run: zip -r deploy.zip . -x '*.git*' './src/*' './aws/*' awscliv2.zip
-        run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r deploy.zip . -x '*.git*' './aws/*' awscliv2.zip
+
+      # Get Current Time
+      - name: Get Current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDD-HH-mm-ss
+          utcOffset: '+09:00'
 
       # Deploy to Elastic Beanstalk
       # application_name과 environment_name을 꼭 확인하자!
@@ -119,6 +127,6 @@ jobs:
           application_name: mufin-server-development
           environment_name: Mufin-server-development-env
           region: ${{ secrets.AWS_REGION }}
-          version_label: ${{github.SHA}}
+          version_label: ${{github.SHA}}-${{ steps.current-time.outputs.formattedTime }}
           deployment_package: deploy.zip
-          wait_for_environment_recovery: 180
+          wait_for_environment_recovery: 300
