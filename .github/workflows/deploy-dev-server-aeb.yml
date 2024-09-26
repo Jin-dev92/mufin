@@ -23,6 +23,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: sudo npm install -g yarn typescript
 
+      - name: Install Nest Cli
+        run: yarn global add @nestjs/cli
+
       # Install project dependencies, test and build
       - name: Install dependencies
         run: yarn install
