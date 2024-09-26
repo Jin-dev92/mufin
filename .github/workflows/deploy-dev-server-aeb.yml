@@ -127,7 +127,7 @@ jobs:
           environment_name: Mufin-server-development-env
           existing_bucket_name: elasticbeanstalk-ap-northeast-2-329599642463
           region: ${{ secrets.AWS_REGION }}
-          version_label: ${{github.SHA}}-${{ steps.current-time.outputs.formattedTime }}
-          deployment_package: deploy.zip
+#          version_label: ${{github.SHA}}-${{ steps.current-time.outputs.formattedTime }}
+          version_label: ${{ steps.current-time.outputs.formattedTime }}_${{ github.run_number }}
+          deployment_package: ./deploy.zip
           wait_for_environment_recovery: 300
-          use_existing_version_if_available: true
