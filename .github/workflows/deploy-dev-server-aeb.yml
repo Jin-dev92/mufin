@@ -125,6 +125,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: mufin-server
           environment_name: Mufin-server-development-env
+          bucket_name: elasticbeanstalk-ap-northeast-2-329599642463
           region: ${{ secrets.AWS_REGION }}
           version_label: ${{github.SHA}}-${{ steps.current-time.outputs.formattedTime }}
           deployment_package: deploy.zip
