@@ -92,7 +92,7 @@ jobs:
       #        run: yarn start:prod
 
       - name: nodecommand
-        run: cp config/integration.Procfile Procfile
+        run: cp config/Procfile Procfile
       # Install AWS CLI 2
       - name: Install AWS CLI 2
         run: |
