@@ -15,7 +15,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
-    "start": "node dist/apps/mufin-nestjs/main",
+    "start": "node dist/apps/mufin-nestjs/apps/mufin-nestjs/src/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/mufin-nestjs/main",
