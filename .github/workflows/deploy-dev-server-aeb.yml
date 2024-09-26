@@ -103,11 +103,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Delete integration Proxy nginx.conf
+        run: rm -rf .platform/nginx/conf.d/*proxy.conf
       # Make ZIP file with source code
       # -x는 zip파일 생성 시에 해당 부분들을 제외한다.
       - name: Generate deployment package
         #        run: zip -r deploy.zip . -x '*.git*' './src/*' './aws/*' awscliv2.zip
-        run: zip -r deploy.zip . -x '*.git*' './src/*' './aws/*' './node_modules' './**/node_modules' awscliv2.zip
+        run: zip -r deploy.zip ./ -x '*.git*' './src/*' './aws/*' './node_modules' './**/node_modules' awscliv2.zip
 
       # Get Current Time
       - name: Get Current time
@@ -119,15 +121,15 @@ jobs:
 
       # Deploy to Elastic Beanstalk
       - name: Deploy to AWS Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v22
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: mufin-server
           environment_name: Mufin-server-development-env
-          existing_bucket_name: elasticbeanstalk-ap-northeast-2-329599642463
           region: ${{ secrets.AWS_REGION }}
 #          version_label: ${{github.SHA}}-${{ steps.current-time.outputs.formattedTime }}
           version_label: ${{ steps.current-time.outputs.formattedTime }}_${{ github.run_number }}
           deployment_package: ./deploy.zip
-          wait_for_environment_recovery: 300
+#          existing_bucket_name: elasticbeanstalk-ap-northeast-2-329599642463
+#          wait_for_environment_recovery: 300
