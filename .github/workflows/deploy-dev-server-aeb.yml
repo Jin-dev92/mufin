@@ -57,9 +57,19 @@ jobs:
     #    needs: buildAndTest
     steps:
       - uses: actions/checkout@v4
-      # env 파일을 이용할 일이 보통 많은데,
-      # Github Secrets를 이용하여 env 파일을 만들고 추가한다.
-      # 참고로 ElasticBeanstalk에 Node 관련을 배포할 때는,
+          # env 파일을 이용할 일이 보통 많은데,
+          # Github Secrets를 이용하여 env 파일을 만들고 추가한다.
+        # 참고로 ElasticBeanstalk에 Node 관련을 배포할 때는,
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: sudo npm install -g yarn typescript
+
+      - name: Install Nest Cli
+        run: yarn global add @nestjs/cli
+
+
       - name: Installing module
         run: yarn
 
