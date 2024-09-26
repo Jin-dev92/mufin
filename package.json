@@ -13,7 +13,7 @@
     "libs/*"
   ],
   "scripts": {
-    "build": "nest build",
+    "build": "npm build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "node dist/apps/mufin-nestjs/apps/mufin-nestjs/src/main",
     "start:dev": "nest start --watch",
