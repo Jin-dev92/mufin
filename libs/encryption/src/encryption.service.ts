@@ -17,7 +17,7 @@ export class EncryptionService {
     try {
       const SALT_OR_ROUNDS =
         this.configService.getOrThrow<number>('AUTH_SALT_ROUNDS');
-      return bcrypt.genSaltSync(SALT_OR_ROUNDS);
+      return bcrypt.genSaltSync(+SALT_OR_ROUNDS);
     } catch (e) {
       throw e;
     }
@@ -54,8 +54,8 @@ export class EncryptionService {
       const pass = crypto.pbkdf2Sync(
         password,
         salt,
-        this.configService.getOrThrow<number>('AUTH_REPEAT'),
-        this.configService.getOrThrow<number>('AUTH_LENGTH'),
+        +this.configService.getOrThrow<number>('AUTH_REPEAT'),
+        +this.configService.getOrThrow<number>('AUTH_LENGTH'),
         'sha512',
       );
       // hex코드로 주기때문에 암호화된 길이 * 2 가됨
@@ -77,6 +77,7 @@ export class EncryptionService {
     };
     return this.jwtService.sign(payload);
   }
+
   generateRefreshToken(user: User) {
     const payload: IJwtPayload = {
       userUid: user.uuid,

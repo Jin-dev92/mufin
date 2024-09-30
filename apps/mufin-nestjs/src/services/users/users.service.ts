@@ -3,6 +3,7 @@ import { CreateUserDto, GetUsersDto, UpdateUserDto } from '../../controllers';
 import {
   DatabaseService,
   User,
+  UserAuth,
   UserAuthRepository,
   UserRepository,
 } from '@libs/database';
@@ -23,17 +24,16 @@ export class UsersService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const user = this.userRepository.create(dto);
+      let userAuth: UserAuth = null;
       if (password) {
         const salt = this.encryptionService.getSalt();
-        const userAuth = this.userAuthRepository.create({
+        userAuth = this.userAuthRepository.create({
           password: this.encryptionService.hashPassword(password, salt),
-          user,
           salt,
         });
-        // user.userAuth = userAuth;
         await queryRunner.manager.save(userAuth);
       }
+      const user = this.userRepository.create({ ...dto, userAuth });
       await queryRunner.manager.save(user);
       await queryRunner.commitTransaction();
       return user;

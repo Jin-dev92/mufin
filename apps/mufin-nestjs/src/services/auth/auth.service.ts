@@ -1,7 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TictokService } from '@libs/tictok';
 import { EncryptionService } from '@libs/encryption';
-import { UserAuthRepository, UserRepository } from '@libs/database';
+import {
+  DatabaseService,
+  UserAuthRepository,
+  UserAuthRoleEnum,
+  UserRepository,
+} from '@libs/database';
 import { KakaoService } from '@libs/kakao';
 import { KakaoOauthCallbackDto, LoginDto, SignUpDto } from '../../controllers';
 
@@ -13,6 +18,7 @@ export class AuthService {
     private readonly encryptionService: EncryptionService,
     private readonly userRepository: UserRepository,
     private readonly userAuthRepository: UserAuthRepository,
+    private readonly databaseService: DatabaseService,
   ) {}
 
   async kakaoLoginExecutes(kakaoId: number) {
@@ -91,14 +97,45 @@ export class AuthService {
 
   async adminLogout() {}
 
-  async adminSignUp(dto: SignUpDto) {}
+  async adminSignUp(dto: SignUpDto) {
+    const queryRunner = this.databaseService.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const { email, password, birth, name, phone } = dto;
+      await this.checkExistUser(email);
+      const salt = this.encryptionService.getSalt();
+      const createdUserAuth = this.userAuthRepository.create({
+        password: this.encryptionService.hashPassword(password, salt),
+        salt,
+        role: UserAuthRoleEnum.ADMIN,
+        // user: createdUser,
+      });
+      await queryRunner.manager.save(createdUserAuth);
 
-  private async checkUser(email: string) {
+      const createdUser = this.userRepository.create({
+        name,
+        email,
+        birth,
+        phone,
+        userAuth: createdUserAuth,
+        // userAuthId: createdUserAuth.id,
+      });
+
+      await queryRunner.manager.save(createdUser);
+      await queryRunner.commitTransaction();
+    } catch (e) {
+      await queryRunner.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  private async checkExistUser(email: string) {
     const user = await this.userRepository.findOne({
       where: { email },
     });
-    if (!user) {
-      throw new UnauthorizedException('해당 유저는 존재하지 않습니다.');
+    if (user) {
+      throw new UnauthorizedException('해당 이메일은 중복되었습니다.');
     }
     return user;
   }

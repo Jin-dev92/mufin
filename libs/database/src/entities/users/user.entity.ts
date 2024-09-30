@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -24,16 +25,16 @@ export class User {
   @Column({ type: 'varchar', length: 20 })
   phone: string;
 
-  @Column({ type: 'varchar', length: 8 })
+  @Column({ type: 'varchar', length: 8, nullable: true, default: null })
   birth: string;
 
   @Column({ type: 'int', default: 0 })
   point: number;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 50, nullable: true, default: null })
   ip: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, nullable: true, default: null })
   useragent: string;
 
   @CreateDateColumn()
@@ -42,13 +43,14 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ type: 'timestamptz', default: null })
+  @Column({ type: 'timestamptz', default: null, nullable: true })
   deleteAt: Date;
 
-  @OneToOne(() => UserAuth, (userAuth) => userAuth.user, {
+  @OneToOne(() => UserAuth, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
+  @JoinColumn()
   userAuth: UserAuth;
 
   @OneToMany(
