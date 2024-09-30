@@ -1,5 +1,10 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { UserAuth } from '@libs/database/entities';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class UserTictokOauth {
@@ -27,6 +32,12 @@ export class UserTictokOauth {
   @Column('timestamptz')
   refresh_expires_on: Date;
 
-  @OneToOne(() => UserAuth, (auth) => auth.id, { nullable: true })
-  userAuth: UserAuth;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @Column({ type: 'timestamptz', default: null, nullable: true })
+  delete_at: Date;
 }

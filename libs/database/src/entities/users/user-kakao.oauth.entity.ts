@@ -1,5 +1,10 @@
-import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
-import { UserAuth } from '@libs/database';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class UserKakaoOauth {
@@ -21,9 +26,12 @@ export class UserKakaoOauth {
   @Column('timestamptz')
   refresh_expires_on: Date;
 
-  @OneToOne(() => UserAuth, {
-    onUpdate: 'CASCADE',
-    onDelete: 'CASCADE',
-  })
-  userAuth: UserAuth;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @Column({ type: 'timestamptz', default: null, nullable: true })
+  delete_at: Date;
 }

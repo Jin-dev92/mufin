@@ -37,6 +37,6 @@ export class UserAuth {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'kakao_oauth_id' })
+  @JoinColumn()
   kakaoOauth: UserKakaoOauth;
 }

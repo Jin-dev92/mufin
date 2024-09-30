@@ -81,7 +81,6 @@ export class UploadController {
     try {
       const { size, path, mimetype, location } =
         await this.uploadService.uploadFile(file);
-      console.log(file);
       return {
         path,
         size,
