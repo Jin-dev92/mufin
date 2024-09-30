@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Artist, Genre } from '@libs/database/entities';
 
@@ -19,8 +21,15 @@ export class Music {
   cover_path: string;
   @Column('varchar')
   audio_path: string;
-  @Column('timestamptz')
+
+  @CreateDateColumn()
   created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @Column({ type: 'timestamptz', default: null, nullable: true })
+  delete_at: Date;
 
   @ManyToOne(() => Artist, (artist) => artist.id)
   artist: Artist;

@@ -38,13 +38,13 @@ export class User {
   useragent: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
   @Column({ type: 'timestamptz', default: null, nullable: true })
-  deleteAt: Date;
+  delete_at: Date;
 
   @OneToOne(() => UserAuth, {
     onUpdate: 'CASCADE',

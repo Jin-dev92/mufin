@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Music } from '@libs/database/entities';
 
 @Entity()
@@ -11,4 +18,13 @@ export class Artist {
 
   @OneToMany(() => Music, (music) => music.artist)
   musics: Music[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @Column({ type: 'timestamptz', default: null, nullable: true })
+  delete_at: Date;
 }

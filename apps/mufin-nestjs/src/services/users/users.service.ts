@@ -5,6 +5,7 @@ import {
   User,
   UserAuth,
   UserAuthRepository,
+  UserAuthRoleEnum,
   UserRepository,
 } from '@libs/database';
 import { EncryptionService } from '@libs/encryption';
@@ -30,6 +31,7 @@ export class UsersService {
         userAuth = this.userAuthRepository.create({
           password: this.encryptionService.hashPassword(password, salt),
           salt,
+          role: UserAuthRoleEnum.ADMIN,
         });
         await queryRunner.manager.save(userAuth);
       }

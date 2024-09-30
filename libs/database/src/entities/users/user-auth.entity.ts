@@ -32,13 +32,6 @@ export class UserAuth {
   @Column({ default: null, type: 'varchar', length: 255 })
   refresh_token: string;
 
-  // @OneToOne(() => User, (user) => user.userAuth, {
-  //   onDelete: 'CASCADE',
-  //   onUpdate: 'CASCADE',
-  // })
-  // @JoinColumn()
-  // user: User;
-
   @OneToOne(() => UserKakaoOauth, {
     nullable: true,
     onDelete: 'CASCADE',
