@@ -1,0 +1,11 @@
+{
+  "name": "@libs/google-apis",
+  "version": "1.0.0",
+  "dependencies": {
+    "google-auth-library": "^9.14.1",
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
+}

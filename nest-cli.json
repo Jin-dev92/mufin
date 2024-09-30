@@ -79,6 +79,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/aws/tsconfig.lib.json"
       }
+    },
+    "google-apis": {
+      "type": "library",
+      "root": "libs/google-apis",
+      "entryFile": "index",
+      "sourceRoot": "libs/google-apis/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/google-apis/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

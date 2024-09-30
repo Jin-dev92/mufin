@@ -73,6 +73,12 @@
       ],
       "@libs/aws/*": [
         "libs/aws/src/*"
+      ],
+      "@libs/google-apis": [
+        "libs/google-apis/src"
+      ],
+      "@libs/google-apis/*": [
+        "libs/google-apis/src/*"
       ]
     }
   }
