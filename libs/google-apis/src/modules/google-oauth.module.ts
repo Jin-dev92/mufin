@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { GoogleApisService } from '../services/google-apis.service';
+import { GoogleOauthService } from '@libs/google-apis/services';
 
 @Module({
-  providers: [GoogleApisService],
-  exports: [GoogleApisService],
+  providers: [GoogleOauthService],
+  exports: [GoogleOauthService],
 })
-export class GoogleApisModule {}
+export class GoogleOauthModule {}

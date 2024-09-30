@@ -1,1 +1,2 @@
-export * from './services/google-apis.service';
+export * from './services';
+export * from './modules';
