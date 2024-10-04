@@ -11,5 +11,5 @@ RUN yarn
 CMD ["yarn", "build"]
 
 
-FROM nginx as runner
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+FROM nginx
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
