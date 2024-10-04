@@ -8,8 +8,4 @@ COPY ./ ./
 #RUN npm install yarn -g
 RUN yarn
 #EXPOSE 3000
-CMD ["yarn", "build"]
-
-
-FROM nginx as runner
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+CMD ["yarn", "start:dev"]
