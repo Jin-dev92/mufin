@@ -1,11 +1,11 @@
 version: "4"
 services:
-  server:
+  mufin-server:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "4000:4000"
     volumes:
       - /usr/src/app/**/**/node_modules # local 의 node_modules 을 참조
       - ./:/user/src/app # local 의 코드를 참조

@@ -6,7 +6,7 @@ async function bootstrap() {
   /* 글로벌 세팅 */
   // app.useGlobalInterceptors();
   // app.useGlobalFilters();
-  await app.listen(+process.env.PORT || 3000);
+  await app.listen(+process.env.PORT || 4000);
 }
 
 bootstrap();
