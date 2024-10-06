@@ -7,7 +7,7 @@ COPY ./ ./
 
 #RUN npm install yarn -g
 RUN yarn
-#EXPOSE 4000
+#EXPOSE 3000
 CMD ["yarn", "build"]
 
 
