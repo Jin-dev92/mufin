@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../dist/apps/mufin-nestjs"
-//    "outDir": "../../dist/mufin-nestjs"
+//    "outDir": "../../dist/apps/mufin-nestjs"
+    "outDir": "../../dist/mufin-nestjs"
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]

@@ -1,0 +1,41 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000"
+    volumes:
+      #      - /usr/src/app/node_modules # local 의 node_modules 을 참조
+      - ./:/usr/src/app # local 의 코드를 참조
+    container_name: backend
+  #  redis:
+  #    image: "redis"
+  nginx:
+    image: "nginx"
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    restart: always
+    volumes:
+      - "./nginx/default.conf:/etc/nginx/default.conf"
+  #    depends_on:
+  #      - mufin-server
+  db:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    build:
+      context: ./libs/database
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./libs/database/data:/var/lib/postgresql/data
+      - ./libs/database/init:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_USER: mufin
+      POSTGRES_PASSWORD: CXszO*1}!agmEi1$~
+      POSTGRES_DB: mufin
