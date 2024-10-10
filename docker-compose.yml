@@ -11,7 +11,7 @@ services:
     depends_on:
       - nestjs
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/config/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - ./nginx/logs:/var/log/nginx
   db:
     image: postgres
@@ -24,7 +24,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-
   nestjs:
     build:
       context: .
@@ -34,8 +33,8 @@ services:
     volumes:
       - /usr/src/app/node_modules # local 의 node_modules 을 참조
       - ./:/usr/src/app # local 의 코드를 참조
-#    container_name: nestjs
-    command: [ "yarn", "start:prod" ]
+    container_name: nestjs
+#    command: [ "yarn", "start:prod" ]
     depends_on:
       - db
     env_file:
@@ -43,3 +42,6 @@ services:
 #    volumes:
 #      - ./libs/database/data:/var/lib/postgresql/data
 #      - ./libs/database/init:/docker-entrypoint-initdb.d/
+#networks:
+#  backbone:
+#    driver: bridge
