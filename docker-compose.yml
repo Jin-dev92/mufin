@@ -1,41 +1,45 @@
-version: "3"
+version: "3.8"
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "4000"
-    volumes:
-      #      - /usr/src/app/node_modules # local 의 node_modules 을 참조
-      - ./:/usr/src/app # local 의 코드를 참조
-    container_name: backend
-  #  redis:
-  #    image: "redis"
   nginx:
-    image: "nginx"
+    image: nginx
     build:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "4000:80"
-    restart: always
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - nestjs
     volumes:
-      - "./nginx/default.conf:/etc/nginx/default.conf"
-  #    depends_on:
-  #      - mufin-server
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/logs:/var/log/nginx
   db:
-    image: "postgres"
+    image: postgres
     ports:
       - "5432:5432"
+    shm_size: 128mb
     build:
       context: ./libs/database
       dockerfile: Dockerfile
     restart: unless-stopped
+    env_file:
+      - .env
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
     volumes:
-      - ./libs/database/data:/var/lib/postgresql/data
-      - ./libs/database/init:/docker-entrypoint-initdb.d/
-    environment:
-      POSTGRES_USER: mufin
-      POSTGRES_PASSWORD: CXszO*1}!agmEi1$~
-      POSTGRES_DB: mufin
+      - /usr/src/app/node_modules # local 의 node_modules 을 참조
+      - ./:/usr/src/app # local 의 코드를 참조
+#    container_name: nestjs
+    command: [ "yarn", "start:prod" ]
+    depends_on:
+      - db
+    env_file:
+      - .env
+#    volumes:
+#      - ./libs/database/data:/var/lib/postgresql/data
+#      - ./libs/database/init:/docker-entrypoint-initdb.d/
