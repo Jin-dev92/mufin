@@ -33,7 +33,7 @@ services:
     volumes:
       - /usr/src/app/node_modules # local 의 node_modules 을 참조
       - ./:/usr/src/app # local 의 코드를 참조
-    container_name: nestjs
+    container_name: "nestjs"
 #    command: [ "yarn", "start:prod" ]
     depends_on:
       - db
