@@ -1,18 +1,5 @@
 version: "3.8"
 services:
-  nginx:
-    image: nginx
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    restart: unless-stopped
-    depends_on:
-      - nestjs
-    volumes:
-      - ./nginx/config/nginx.conf:/etc/nginx/conf.d/nginx.conf
-      - ./nginx/logs:/var/log/nginx
   db:
     image: postgres
     ports:
@@ -33,12 +20,25 @@ services:
     volumes:
       - /usr/src/app/node_modules # local 의 node_modules 을 참조
       - ./:/usr/src/app # local 의 코드를 참조
-    container_name: "nestjs"
+    container_name: nestjs
 #    command: [ "yarn", "start:prod" ]
     depends_on:
       - db
     env_file:
       - .env
+  nginx:
+    image: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - nestjs
+    volumes:
+      - ./nginx/config/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/logs:/var/log/nginx
 #    volumes:
 #      - ./libs/database/data:/var/lib/postgresql/data
 #      - ./libs/database/init:/docker-entrypoint-initdb.d/
