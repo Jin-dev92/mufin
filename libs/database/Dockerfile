@@ -1,3 +1,7 @@
-FROM postgres:14.1-alpine
+FROM postgres:16
+
+#ENV POSTGRES_USER=mufin
+#ENV POSTGRES_PASSWORD=CXszO*1}!agmEi1$~
+#ENV POSTGRES_DB=mufin
 
 EXPOSE 5432

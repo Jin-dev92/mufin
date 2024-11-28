@@ -1,31 +1,5 @@
 version: "3.8"
 services:
-  db:
-    image: postgres
-    ports:
-      - "5432:5432"
-    shm_size: 128mb
-    build:
-      context: ./libs/database
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    env_file:
-      - .env
-  nestjs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "4000:4000"
-    volumes:
-      - /usr/src/app/node_modules # local 의 node_modules 을 참조
-      - ./:/usr/src/app # local 의 코드를 참조
-    container_name: nestjs
-#    command: [ "yarn", "start:prod" ]
-    depends_on:
-      - db
-    env_file:
-      - .env
   nginx:
     image: nginx
     build:
@@ -39,9 +13,37 @@ services:
     volumes:
       - ./nginx/config/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - ./nginx/logs:/var/log/nginx
-#    volumes:
-#      - ./libs/database/data:/var/lib/postgresql/data
-#      - ./libs/database/init:/docker-entrypoint-initdb.d/
-#networks:
-#  backbone:
-#    driver: bridge
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    shm_size: 128mb
+    build:
+      context: ./libs/database
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+#    env_file:
+#      - .env
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    volumes:
+      - /usr/src/app/node_modules # local 의 node_modules 을 참조
+      - ./:/usr/src/app # local 의 코드를 참조
+    container_name: nestjs
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
